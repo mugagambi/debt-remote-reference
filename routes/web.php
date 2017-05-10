@@ -33,4 +33,6 @@ Route::post('/customers/', 'CustomerController@store_update')->name('customer-st
 
 Route::delete('/customers/{profile}', 'CustomerController@destroy')->name('customer-delete');
 
+Route::get('/downloadExcel/{type}', 'DueListingController@downloadExcelFile')->name('downloadExcel');
+
 

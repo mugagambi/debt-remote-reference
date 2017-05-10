@@ -2,16 +2,17 @@
     <div id="demo">
         <div class="row">
             <div class="col-md-5 col-md-offset-3">
+                <h4 class="title">Search Customer by national ID/phone number</h4>
                 <form id="search" v-on:submit.prevent="">
-                    Search <input class="form-control" name="query" v-model="searchQuery">
+                    <input class="form-control" name="query" v-model="searchQuery">
                 </form>
             </div>
         </div>
-        <grid
-                :data="gridData"
-                :columns="gridColumns"
-                :filter-key="searchQuery">
-        </grid>
+            <grid
+                    :data="gridData"
+                    :columns="gridColumns"
+                    :filter-key="searchQuery">
+            </grid>
     </div>
 </template>
 <script>

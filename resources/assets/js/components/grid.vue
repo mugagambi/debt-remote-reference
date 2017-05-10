@@ -1,6 +1,5 @@
 <template>
-    <div>
-    <table class="table table-responsive table-striped" v-if="filteredData.length > 0">
+    <table class="table table-responsive table-striped">
         <thead>
         <tr>
             <th v-for="key in columns"
@@ -10,6 +9,7 @@
                 <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
           </span>
             </th>
+            <th  class="text-center">Debt status</th>
         </tr>
         </thead>
         <tbody>
@@ -17,11 +17,10 @@
             <td v-for="key in columns">
                 {{entry[key]}}
             </td>
+            <td><a class="btn btn-default" href="/customers" title="View Customer Debt status" role="button">Debt</a></td>
         </tr>
         </tbody>
     </table>
-        <h3 class="title" v-if="filteredData.length < 0">There is no customer with such details</h3>
-    </div>
 </template>
 <script>
     export default {
