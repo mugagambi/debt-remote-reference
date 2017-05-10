@@ -2,7 +2,7 @@
     <div id="demo">
         <div class="row">
             <div class="col-md-5 col-md-offset-3">
-                <form id="search">
+                <form id="search" v-on:submit.prevent="">
                     Search <input class="form-control" name="query" v-model="searchQuery">
                 </form>
             </div>

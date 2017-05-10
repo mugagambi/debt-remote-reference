@@ -1,5 +1,6 @@
 <template>
-    <table class="table table-responsive table-striped">
+    <div>
+    <table class="table table-responsive table-striped" v-if="filteredData.length > 0">
         <thead>
         <tr>
             <th v-for="key in columns"
@@ -19,6 +20,8 @@
         </tr>
         </tbody>
     </table>
+        <h3 class="title" v-if="filteredData.length < 0">There is no customer with such details</h3>
+    </div>
 </template>
 <script>
     export default {
