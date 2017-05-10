@@ -43,7 +43,11 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        &nbsp;@if (Auth::user())
+                                  <li><a href="{{ url('customers') }}">Customers</a> </li>
+                                  <li><a href="#">Find Customer Debt Status</a> </li>
+                                  <li><a href="#">Debtors Report</a> </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

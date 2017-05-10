@@ -18,9 +18,9 @@ class CreateProfilesTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
-            $table->string('phone');
+            $table->string('phone')->unique();
             $table->string('address');
-            $table->string('national_id');
+            $table->unsignedInteger('national_id')->unique();
             $table->timestamps();
         });
     }

@@ -16,6 +16,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('grid', require('./components/grid.vue'));
+Vue.component('customers', require('./components/customers_grid.vue'));
 
 const app = new Vue({
     el: '#app'

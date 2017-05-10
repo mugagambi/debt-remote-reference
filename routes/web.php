@@ -18,3 +18,19 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/customers', 'CustomerController@index')->name('customers');
+
+Route::get('/customers/list', 'CustomerController@customers_list')->name('customers-list');
+
+Route::get('/customers/create', 'CustomerController@create')->name('customer-create');
+
+Route::post('/customers/create', 'CustomerController@store')->name('customer-store');
+
+Route::get('/customers/{profile}/edit', 'CustomerController@edit')->name('customer-edit');
+
+Route::post('/customers/', 'CustomerController@store_update')->name('customer-store');
+
+Route::delete('/customers/{profile}', 'CustomerController@destroy')->name('customer-delete');
+
+
