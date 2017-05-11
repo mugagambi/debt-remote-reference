@@ -37,5 +37,7 @@ Route::get('/downloadExcel/{type}', 'DueListingController@downloadExcelFile')->n
 
 Route::get('/debtors', 'DueListingController@index')->name('debtors');
 
+Route::get('/debt/status/{profile}', 'DueListingController@debt_status')->name('debt_status');
+
 
 

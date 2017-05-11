@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DueListing;
+use App\Profile;
 use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -94,6 +95,17 @@ class DueListingController extends Controller
                 $sheet->fromArray($data);
             });
         })->export($type);
+    }
+    /**
+    *Return Debt status for a certain customer
+     *@param Profile $profile
+     * @return \Response
+     */
+    public function debt_status(Profile $profile)
+    {
+        $debts = DueListing::where('profile_id', $profile->id)->get();
+        $total_debt = $debts->sum('amount');
+        return view('due-listings.debt-status',['profile' => $profile, 'debts'=> $debts, 'total_debt' => $total_debt]);
     }
 
 }

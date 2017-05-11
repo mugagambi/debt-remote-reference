@@ -31,7 +31,7 @@
                                             <td>{{ $profile->email }}</td>
                                             <td>{{ $profile->address }}</td>
                                             <td><a href="{{ route('customer-edit', ['$profile' => $profile->id]) }}" class="btn btn-primary btn-sm" title="Edit customer profile" role="button">Edit</a> </td>
-                                            <td><a href="#" class="btn btn-default btn-sm" title="View Customer debt status" role="button">Debt</a> </td>
+                                            <td><a href="{{ route('debt_status', ['$profile' => $profile->id]) }}" class="btn btn-default btn-sm" title="View Customer debt status" role="button">Debt</a> </td>
                                             <td><a href="{{ route('customer-delete', ['$profile' => $profile->id]) }}" class="btn btn-danger btn-sm" title="remove customer profile" role="button">Delete</a> </td>
                                         </tr>
                                     @endforeach
