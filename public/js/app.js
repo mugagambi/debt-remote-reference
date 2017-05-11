@@ -4283,7 +4283,7 @@ if (typeof jQuery === 'undefined') {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(35)();
-exports.push([module.i, "\n#demo {\n    font-family: Helvetica Neue, Arial, sans-serif;\n    font-size: 14px;\n    color: #444!important;\n}\ntable {\n    border: 2px solid #42b983;\n    border-radius: 3px;\n    background-color: #fff!important;\n}\nth {\n    background-color: #42b983!important;\n    color: rgba(255,255,255,0.66)!important;\n    cursor: pointer;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n}\ntd {\n    background-color: #f9f9f9;\n}\nth, td {\n    min-width: 120px;\n    padding: 10px 20px;\n}\nth.active {\n    color: #fff!important;\n}\nth.active .arrow {\n    opacity: 1!important;\n}\n.arrow {\n    display: inline-block;\n    vertical-align: middle;\n    width: 0;\n    height: 0;\n    margin-left: 5px;\n    opacity: 0.66;\n}\n.arrow.asc {\n    border-left: 4px solid transparent;\n    border-right: 4px solid transparent;\n    border-bottom: 4px solid #fff;\n}\n.arrow.dsc {\n    border-left: 4px solid transparent;\n    border-right: 4px solid transparent;\n    border-top: 4px solid #fff;\n}\n#search {\n    margin-bottom: 20px;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 35 */

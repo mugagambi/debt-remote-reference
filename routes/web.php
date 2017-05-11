@@ -29,10 +29,13 @@ Route::post('/customers/create', 'CustomerController@store')->name('customer-sto
 
 Route::get('/customers/{profile}/edit', 'CustomerController@edit')->name('customer-edit');
 
-Route::post('/customers/', 'CustomerController@store_update')->name('customer-store');
+Route::post('/customers/', 'CustomerController@store_update')->name('customer-store-edited');
 
-Route::delete('/customers/{profile}', 'CustomerController@destroy')->name('customer-delete');
+Route::get('/customers/{profile}', 'CustomerController@destroy')->name('customer-delete');
 
 Route::get('/downloadExcel/{type}', 'DueListingController@downloadExcelFile')->name('downloadExcel');
+
+Route::get('/debtors', 'DueListingController@index')->name('debtors');
+
 
 

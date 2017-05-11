@@ -21,7 +21,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('customers.index');
+        $profiles = Profile::orderBy('updated_at', 'dsc')->get();
+        return view('customers.index', ['profiles' => $profiles, 'index' => 0]);
     }
 
     /**
@@ -91,12 +92,23 @@ class CustomerController extends Controller
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'email' => 'email|required',
-            'phone' => 'string|required|unique:tbl_profiles',
             'address' => 'string|required',
-            'national_id' => 'integer|required|unique:tbl_profiles'
         ]);
 
         $profile = Profile::find($request['id']);
+
+        if ($profile->phone != $request['phone']) {
+            $this->validate($request, [
+                'phone' => 'string|required|unique:tbl_profiles'
+            ]);
+        }
+
+        if ($profile->national_id != $request['national_id']) {
+            $this->validate($request, [
+                'national_id' => 'integer|required|unique:tbl_profiles'
+            ]);
+        }
+
         $profile->first_name = $request['first_name'];
         $profile->last_name = $request['last_name'];
         $profile->email = $request['email'];

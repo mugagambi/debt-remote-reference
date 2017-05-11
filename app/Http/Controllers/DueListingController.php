@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DueListing;
 use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,16 +21,47 @@ class DueListingController extends Controller
     /**
      * Return all the debtors
      *This is the list of customers and their debts
-     * @return \Response
+     * @return \Illuminate\Support\Collection
      */
     public function index()
     {
-        $debtors = DB::table('tbl_profiles')
-            ->join('tbl_due_listings', 'tbl_profiles.id', '=', 'tbl_due_listings.profile_id')
+        $debtors = DB::table('tbl_due_listings')
+            ->leftJoin('tbl_profiles', 'tbl_profiles.id', '=', 'tbl_due_listings.profile_id')
             ->select('tbl_profiles.first_name', 'tbl_profiles.last_name', 'tbl_profiles.phone', 'tbl_profiles.address'
                 , 'tbl_profiles.email', 'tbl_profiles.national_id', 'tbl_due_listings.amount', 'tbl_due_listings.date_credited')
             ->get();
+        return $debtors;
+    }
+
+    /**
+    *Add new debt
+     *@return \Response
+     */
+    public function create()
+    {
         return view();
+    }
+
+    /**
+    *Store created debt
+     *@param request
+     *@return \Response
+     */
+    public function store(Request $request)
+    {
+        //validate data sent
+        $this->validate($request, [
+            'amount' => 'required|numeric',
+            'profile_id' => 'integer|required',
+            'date_credited' => 'date|required'
+        ]);
+        DueListing::create([
+            'profile_id' => $request['profile_id'],
+            'amount' => $request['amount'],
+            'date_credited' => $request['date_credited']
+        ]);
+        return redirect();
+
     }
 
     /**
