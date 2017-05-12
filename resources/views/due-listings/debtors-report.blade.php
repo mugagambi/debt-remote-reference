@@ -26,5 +26,6 @@
                 </div>
             </div>
         </div>
+        <debtors></debtors>
     </div>
 @endsection

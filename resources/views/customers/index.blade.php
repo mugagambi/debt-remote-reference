@@ -12,7 +12,6 @@
                                 <h1 class="title text-center">Customer Profiles</h1>
                                 <table class="table table-condensed">
                                     <tr>
-                                        <th>#</th>
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>Nation Id</th>
@@ -23,7 +22,6 @@
                                     </tr>
                                     @foreach($profiles as $profile)
                                         <tr>
-                                            <td>{{ ++$index }}</td>
                                             <td>{{ $profile->first_name }}</td>
                                             <td>{{ $profile->last_name }}</td>
                                             <td>{{ $profile->national_id }}</td>
@@ -36,6 +34,7 @@
                                         </tr>
                                     @endforeach
                                 </table>
+                                {{ $profiles->links() }}
                             </div>
                         </div>
             </div>

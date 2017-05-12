@@ -21,8 +21,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $profiles = Profile::orderBy('updated_at', 'dsc')->get();
-        return view('customers.index', ['profiles' => $profiles, 'index' => 0]);
+        $profiles = Profile::orderBy('updated_at', 'dsc')->simplePaginate(10);
+        return view('customers.index', ['profiles' => $profiles]);
     }
 
     /**

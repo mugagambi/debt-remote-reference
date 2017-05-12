@@ -28,11 +28,6 @@ class DueListingController extends Controller
      */
     public function index()
     {
-        $debtors = DB::table('tbl_due_listings')
-            ->leftJoin('tbl_profiles', 'tbl_profiles.id', '=', 'tbl_due_listings.profile_id')
-            ->select('tbl_profiles.first_name', 'tbl_profiles.last_name', 'tbl_profiles.phone', 'tbl_profiles.address'
-                , 'tbl_profiles.email', 'tbl_profiles.national_id', 'tbl_due_listings.amount', 'tbl_due_listings.date_credited')
-            ->get();
         return view('due-listings.debtors-report');
     }
 
@@ -43,7 +38,7 @@ class DueListingController extends Controller
     public function debtors_list()
     {
         return DB::table('tbl_due_listings')
-            ->leftJoin('tbl_profiles', 'tbl_profiles.id', '=', 'tbl_due_listings.profile_id')
+            ->join('tbl_profiles', 'tbl_profiles.id', '=', 'tbl_due_listings.profile_id')
             ->select('tbl_profiles.first_name', 'tbl_profiles.last_name', 'tbl_profiles.phone', 'tbl_profiles.address'
                 , 'tbl_profiles.email', 'tbl_profiles.national_id', 'tbl_due_listings.amount', 'tbl_due_listings.date_credited')
             ->get();
