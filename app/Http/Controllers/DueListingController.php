@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\DueListing;
 use App\Profile;
 use Excel;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class DueListingController extends Controller
 {
@@ -21,9 +22,9 @@ class DueListingController extends Controller
     }
 
     /**
-     * Return all the debtors
+     * Return debtors-report view
      *This is the list of customers and their debts
-     * @return \Illuminate\Support\Collection
+     * @return \Response
      */
     public function index()
     {
@@ -32,7 +33,20 @@ class DueListingController extends Controller
             ->select('tbl_profiles.first_name', 'tbl_profiles.last_name', 'tbl_profiles.phone', 'tbl_profiles.address'
                 , 'tbl_profiles.email', 'tbl_profiles.national_id', 'tbl_due_listings.amount', 'tbl_due_listings.date_credited')
             ->get();
-        return $debtors;
+        return view('due-listings.debtors-report');
+    }
+
+    /**
+     *Return all debtors
+     * @return Collection
+     */
+    public function debtors_list()
+    {
+        return DB::table('tbl_due_listings')
+            ->leftJoin('tbl_profiles', 'tbl_profiles.id', '=', 'tbl_due_listings.profile_id')
+            ->select('tbl_profiles.first_name', 'tbl_profiles.last_name', 'tbl_profiles.phone', 'tbl_profiles.address'
+                , 'tbl_profiles.email', 'tbl_profiles.national_id', 'tbl_due_listings.amount', 'tbl_due_listings.date_credited')
+            ->get();
     }
 
     /**
@@ -135,8 +149,7 @@ class DueListingController extends Controller
                 $profile = Profile::where('phone', $request['key'])->firstOrFail();
                 flash('Debt details for ' . $profile->first_name . ' ' . $profile->last_name)->success();
                 return redirect('/debt/status/' . $profile->id);
-            }
-            catch (ModelNotFoundException $e) {
+            } catch (ModelNotFoundException $e) {
                 flash('Customer with that phone number not found.Search again')->error()->important();
                 return redirect('debt/status');
             }
@@ -146,8 +159,7 @@ class DueListingController extends Controller
                 $profile = Profile::where('national_id', (int)$request['key'])->firstOrFail();
                 flash('Debt details for ' . $profile->first_name . ' ' . $profile->last_name)->success();
                 return redirect('/debt/status/' . $profile->id);
-            }
-            catch (ModelNotFoundException $e) {
+            } catch (ModelNotFoundException $e) {
                 flash('Customer with that National ID not found.Search Again')->error()->important();
                 return redirect('debt/status');
             }

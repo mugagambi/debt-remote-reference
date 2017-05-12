@@ -6,7 +6,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">Find customer debt status</div>
-                    <div class="body">
+                    <div class="panel-body">
                         <h1 class="title text-center">Find Customer Debt Status</h1>
                         <form class="form-horizontal" role="form" method="POST">
                             {{csrf_field()}}

@@ -33,9 +33,11 @@ Route::post('/customers/', 'CustomerController@store_update')->name('customer-st
 
 Route::get('/customers/{profile}', 'CustomerController@destroy')->name('customer-delete');
 
-Route::get('/downloadExcel/{type}', 'DueListingController@downloadExcelFile')->name('downloadExcel');
+Route::get('/downloadExcel/{type}', 'DueListingController@downloadExcelFile')->middleware('role')->name('downloadExcel');
 
-Route::get('/debtors', 'DueListingController@index')->middleware('role')->name('debtors');
+Route::get('/debtors/report', 'DueListingController@index')->middleware('role')->name('debtors-report');
+
+Route::get('/debtors/list', 'DueListingController@debtors_list')->middleware('role')->name('debtors-list');
 
 Route::get('/debt/status/{profile}', 'DueListingController@debt_status')->name('debt_status');
 

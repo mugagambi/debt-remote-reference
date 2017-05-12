@@ -17,7 +17,7 @@ class checkRole
     public function handle($request, Closure $next)
     {
         if ($request->user()->role != 'roleB') {
-            flash('Sorry! You are not allowed to navigate to that route')->error();
+            flash('Sorry! You are not allowed to perform that action')->error()->important();
             return redirect('home');
         }
         return $next($request);

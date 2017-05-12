@@ -46,7 +46,7 @@
                         &nbsp;@if (Auth::user())
                                   <li><a href="{{ url('customers') }}">Customers</a> </li>
                                   <li><a href="{{ route('find_customer') }}">Find Customer Debt Status</a> </li>
-                                  <li><a href="#">Debtors Report</a> </li>
+                                  <li><a href="{{ route('debtors-report') }}">Debtors Report</a> </li>
                         @endif
                     </ul>
 
