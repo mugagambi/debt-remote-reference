@@ -7,6 +7,7 @@ use App\Profile;
 use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DueListingController extends Controller
 {
@@ -35,8 +36,8 @@ class DueListingController extends Controller
     }
 
     /**
-    *Add new debt
-     *@return \Response
+     *Add new debt
+     * @return \Response
      */
     public function create()
     {
@@ -44,9 +45,9 @@ class DueListingController extends Controller
     }
 
     /**
-    *Store created debt
-     *@param request
-     *@return \Response
+     *Store created debt
+     * @param request
+     * @return \Response
      */
     public function store(Request $request)
     {
@@ -96,16 +97,63 @@ class DueListingController extends Controller
             });
         })->export($type);
     }
+
     /**
-    *Return Debt status for a certain customer
-     *@param Profile $profile
+     *Return Debt status for a certain customer
+     * @param Profile $profile
      * @return \Response
      */
     public function debt_status(Profile $profile)
     {
         $debts = DueListing::where('profile_id', $profile->id)->get();
         $total_debt = $debts->sum('amount');
-        return view('due-listings.debt-status',['profile' => $profile, 'debts'=> $debts, 'total_debt' => $total_debt]);
+        return view('due-listings.debt-status', ['profile' => $profile, 'debts' => $debts, 'total_debt' => $total_debt]);
+    }
+
+    /**
+     *Find customer debt status
+     * @return \Response
+     */
+    public function find_customer_debt_status()
+    {
+        return view('due-listings.find-customer');
+    }
+
+    /**
+     *Perform the customer debt search
+     * @param Request $request
+     * @return \Response
+     */
+    public function search_debt(Request $request)
+    {
+        $this->validate($request, [
+            'search' => 'required|string',
+            'key' => 'required|string'
+        ]);
+        if ($request['search'] == 'phone') {
+            try {
+                $profile = Profile::where('phone', $request['key'])->firstOrFail();
+                flash('Debt details for ' . $profile->first_name . ' ' . $profile->last_name)->success();
+                return redirect('/debt/status/' . $profile->id);
+            }
+            catch (ModelNotFoundException $e) {
+                flash('Customer with that phone number not found.Search again')->error()->important();
+                return redirect('debt/status');
+            }
+        }
+        if ($request['search'] == 'national_id') {
+            try {
+                $profile = Profile::where('national_id', (int)$request['key'])->firstOrFail();
+                flash('Debt details for ' . $profile->first_name . ' ' . $profile->last_name)->success();
+                return redirect('/debt/status/' . $profile->id);
+            }
+            catch (ModelNotFoundException $e) {
+                flash('Customer with that National ID not found.Search Again')->error()->important();
+                return redirect('debt/status');
+            }
+        }
+        flash('Sorry could not get your search.Please try again')->error()->important();
+        return redirect('debt/status');
     }
 
 }

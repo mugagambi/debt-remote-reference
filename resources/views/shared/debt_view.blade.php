@@ -2,6 +2,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             Customer Debt status
+            <a class="pull-right" href="#">Find Customer Debt Status</a>
         </div>
         <div class="panel-body">
             <h1 class="title text-center">Customer Debt Status</h1>

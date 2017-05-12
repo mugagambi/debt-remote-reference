@@ -8,6 +8,7 @@ class checkRole
 {
     /**
      * Handle an incoming request.
+     * This middle checks that user with roleA does not navigate to restricted routes accessible by only roleB
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

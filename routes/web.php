@@ -39,5 +39,7 @@ Route::get('/debtors', 'DueListingController@index')->middleware('role')->name('
 
 Route::get('/debt/status/{profile}', 'DueListingController@debt_status')->name('debt_status');
 
+Route::get('/debt/status', 'DueListingController@find_customer_debt_status')->name('find_customer');
 
+Route::post('/debt/status', 'DueListingController@search_debt')->name('search_customer');
 
