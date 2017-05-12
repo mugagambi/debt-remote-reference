@@ -31,7 +31,7 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>Ksh. {{$debt->amount}}</td>
-                        <td>{{$debt->date_credited}}</td>
+                        <td>{{$debt->date}}</td>
                     </tr>
                 @endforeach
             </table>

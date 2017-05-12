@@ -1,5 +1,5 @@
 <template>
-    <table>
+    <table class="table table-bordered">
         <thead>
         <tr>
             <th v-for="key in columns"
@@ -81,7 +81,7 @@
     }
 
     th {
-        background-color: #42b983;
+        background-color: #42b983!important;
         color: rgba(255,255,255,0.66);
         cursor: pointer;
         -webkit-user-select: none;

@@ -17,7 +17,7 @@ class CreateDueListingsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('profile_id');
             $table->decimal('amount', 15, 2);
-            $table->dateTime('date_credited');
+            $table->date('date');
             $table->timestamps();
         });
     }

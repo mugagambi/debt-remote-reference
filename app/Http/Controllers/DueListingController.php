@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\Array_;
 
 class DueListingController extends Controller
 {
@@ -33,15 +34,15 @@ class DueListingController extends Controller
 
     /**
      *Return all debtors
-     * @return Collection
+     *
      */
     public function debtors_list()
     {
         return DB::table('tbl_due_listings')
             ->join('tbl_profiles', 'tbl_profiles.id', '=', 'tbl_due_listings.profile_id')
             ->select('tbl_profiles.first_name', 'tbl_profiles.last_name', 'tbl_profiles.phone', 'tbl_profiles.address'
-                , 'tbl_profiles.email', 'tbl_profiles.national_id', 'tbl_due_listings.amount', 'tbl_due_listings.date_credited')
-            ->get();
+                , 'tbl_profiles.email', 'tbl_profiles.national_id', 'tbl_due_listings.amount', 'tbl_due_listings.date')
+            ->simplePaginate( 10);
     }
 
     /**
@@ -86,7 +87,7 @@ class DueListingController extends Controller
         $debts = DB::table('tbl_profiles')
             ->join('tbl_due_listings', 'tbl_profiles.id', '=', 'tbl_due_listings.profile_id')
             ->select('tbl_profiles.first_name', 'tbl_profiles.last_name', 'tbl_profiles.phone', 'tbl_profiles.address'
-                , 'tbl_profiles.email', 'tbl_profiles.national_id', 'tbl_due_listings.amount', 'tbl_due_listings.date_credited')
+                , 'tbl_profiles.email', 'tbl_profiles.national_id', 'tbl_due_listings.amount', 'tbl_due_listings.date')
             ->get();
         foreach ($debts as $debt) {
             $data[] = array(
@@ -97,7 +98,7 @@ class DueListingController extends Controller
                 "address" => $debt->address,
                 "national_id" => $debt->national_id,
                 "amount" => $debt->amount,
-                "date_credited" => $debt->date_credited
+                "date" => $debt->date
             );
         }
         return Excel::create('Debtors', function ($excel) use ($data) {

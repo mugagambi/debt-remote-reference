@@ -17,7 +17,7 @@ class DueListingsTableSeeder extends Seeder
             DB::table('tbl_due_listings')->insert([
                 'profile_id' => mt_rand(1,100),
                 'amount' => mt_rand(100,1000000),
-                'date_credited' => $faker->dateTime,
+                'date' => $faker->date(),
                 'created_at' => $faker->dateTime($max = 'now'),
                 'updated_at' => $faker->dateTime($max = 'now')
             ]);
