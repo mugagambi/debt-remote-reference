@@ -67,6 +67,7 @@ class CustomerController extends Controller
             'address' => $request['address'],
             'national_id' => $request['national_id']
         ]);
+        flash('Customer Credited successfully')->success();
         return redirect('/customers');
     }
 
@@ -116,6 +117,7 @@ class CustomerController extends Controller
         $profile->address = $request['address'];
         $profile->national_id = $request['national_id'];
         $profile->save();
+        flash('Customer Updated successfully')->success();
         return redirect('customers');
     }
 
@@ -127,6 +129,7 @@ class CustomerController extends Controller
     public function destroy(Profile $profile)
     {
         $profile->delete();
+        flash('Customer Removed successfully')->success();
         return redirect('/customers');
     }
 }

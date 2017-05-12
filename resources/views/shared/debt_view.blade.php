@@ -19,7 +19,8 @@
                 </div>
             </div>
             <h3 class="title text-center"><u>Debt Report</u></h3>
-            <h3 class="title pull-right">Total Debt: ksh. {{$total_debt}}</h3>
+            <h3 class="title pull-right">Total Debt:Ksh. {{$total_debt}}</h3>
+            @if( count($debts) > 0)
             <table class="table table-condensed">
                 <tr>
                     <th>#</th>
@@ -34,6 +35,9 @@
                     </tr>
                 @endforeach
             </table>
+                @else
+                <h4 class="title">This customer has no debt</h4>
+            @endif
         </div>
     </div>
 </div>

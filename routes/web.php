@@ -35,7 +35,7 @@ Route::get('/customers/{profile}', 'CustomerController@destroy')->name('customer
 
 Route::get('/downloadExcel/{type}', 'DueListingController@downloadExcelFile')->name('downloadExcel');
 
-Route::get('/debtors', 'DueListingController@index')->name('debtors');
+Route::get('/debtors', 'DueListingController@index')->middleware('role')->name('debtors');
 
 Route::get('/debt/status/{profile}', 'DueListingController@debt_status')->name('debt_status');
 
