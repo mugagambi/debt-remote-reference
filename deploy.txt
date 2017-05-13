@@ -1,1 +1,57 @@
-    
+## $ To indicate an executable command
+## Upgrade the system
+
+$sudo apt-get update
+$sudo apt-get upgrade
+## Install add repositories for the latest php5
+$sudo add-apt-respository ppa:ondrej/php5
+$sudo apt-get update
+## Install dependencies
+$sudo apt-get install php5 php5-mcrypt php5-gd apache2 libapache2-mod-php5 curl git
+$sudo php5enmod mcrypt
+
+## Install Composer.This is a laravel 5.4 project and it requires composer
+$curl -sS https://getcomposer.org/installer | php
+$sudo mv composer.phar /usr/local/bin/composer
+
+## Move to the working
+$cd /var/www/html
+$sudo git clone https://github.com/mugash/debt-remote-reference.git
+$cd debt-remote-reference
+
+## Create env file
+$ cp .env-example .env
+
+## Inside .env file  change APP_DEBUG=false, DB_CONNECTION=pgsql and DB_HOST, DB_PORT and DB_DATABASE,DB_USERNAME,DB_PASSWORD to details sent in developer test file
+
+## Install dependencies
+$sudo composer install
+
+## grant your user group access to the folder
+$sudo chgrp -R [group] /var/www/html/debt-remote-reference #[group] enter your user group
+$sudo chmod -R 775 /var/www/html/debt-remote-reference/storage
+
+## Provide configuration for the app in apache2
+$cd /etc/apache2/sites-available
+$sudo nano debt-remote-reference.conf
+## Add the following content in debt-remote-reference.conf file
+
+<VirtualHost *:80>
+    ServerName [server_domain_or_IP]#change to your server domain or ip.Remove the []
+
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/debt-remote-reference/public
+
+    <Directory /var/www/html/debt-remote-reference>
+        AllowOverride All
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+## Enable the newly created config file and enable mod_rewrite to allow permalink to function properly
+$sudo a2dissite 000-default.conf
+$sudo a2ensite debt-remote-reference.conf
+$sudo a2enmod rewrite
+$sudo service apache2 restart
