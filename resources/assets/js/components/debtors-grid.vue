@@ -32,7 +32,7 @@
             }
         },
         created () {
-            axios.get('http://localhost:8000/debtors/list')
+            axios.get('/debtors/list/')
                 .then((response) => {
                 this.gridData = response.data.data;
                 this.previous_url = response.data.prev_page_url;
