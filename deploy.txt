@@ -27,6 +27,9 @@ $ cp .env-example .env
 ## Install dependencies
 $sudo composer install
 
+## Run database migrations
+$php artisan migrate
+
 ## grant your user group access to the folder
 $sudo chgrp -R [group] /var/www/html/debt-remote-reference #[group] enter your user group
 $sudo chmod -R 775 /var/www/html/debt-remote-reference/storage
